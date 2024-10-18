@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>World, Stage, and Percentage Inputs</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="main-container">
+      <!-- Left side: World, Stage, and Holes -->
+      <div class="left-section">
+        <div class="container">
+          <div class="selector">
+            <label for="world-select">World</label>
+            <select id="world-select" class="dropdown">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </div>
+          <div class="selector">
+            <label for="stage-select">Stage</label>
+            <select id="stage-select" class="dropdown" onchange="updateHoles()">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="holes-container" class="holes-container">
+          <!-- Holes will be dynamically added here -->
+        </div>
+
+        <!-- Arrows for navigating generations -->
+        <div class="navigation">
+          <button id="prev-btn" onclick="prevGeneration()">⬅️ Prev</button>
+          <span id="generation-counter">Generation 1/1</span>
+          <button id="next-btn" onclick="nextGeneration()">Next ➡️</button>
+        </div>
+      </div>
+
+      <!-- Right side: Images, Percentage inputs, and Generation Result -->
+      <div class="right-section">
+        <!-- Input for Number of Prize Pools -->
+        <div class="prize-pool-input">
+          <input
+            type="number"
+            id="prize-pool-number"
+            class="number-input"
+            min="1"
+            value="1"
+          />
+          <label for="prize-pool-number">Number of prize pools</label>
+        </div>
+
+        <div class="percentage-container">
+          <div class="percentage-inputs">
+            <div class="input-row">
+              <img src="images/Nothing.png" alt="Nothing" class="item-img" />
+              <label for="nothing-percentage">Nothing</label>
+              <input
+                type="number"
+                id="nothing-percentage"
+                class="percentage-input"
+                min="0"
+                max="100"
+                value="0"
+              />
+              %
+            </div>
+            <div class="input-row">
+              <img src="images/Bomb.png" alt="Bomb" class="item-img" />
+              <label for="bomb-percentage">Bomb</label>
+              <input
+                type="number"
+                id="bomb-percentage"
+                class="percentage-input"
+                min="0"
+                max="100"
+                value="0"
+              />
+              %
+            </div>
+            <div class="input-row">
+              <img src="images/Chest.png" alt="Chest" class="item-img" />
+              <label for="chest-percentage">Chest</label>
+              <input
+                type="number"
+                id="chest-percentage"
+                class="percentage-input"
+                min="0"
+                max="100"
+                value="0"
+              />
+              %
+            </div>
+            <div class="input-row">
+              <img
+                src="images/Strange Object.png"
+                alt="Strange Object"
+                class="item-img"
+              />
+              <label for="strange-object-percentage">Strange Object</label>
+              <input
+                type="number"
+                id="strange-object-percentage"
+                class="percentage-input"
+                min="0"
+                max="100"
+                value="0"
+              />
+              %
+            </div>
+            <div class="input-row">
+              <img src="images/Pet.png" alt="Pet" class="item-img" />
+              <label for="pet-percentage">Pet</label>
+              <input
+                type="number"
+                id="pet-percentage"
+                class="percentage-input"
+                min="0"
+                max="100"
+                value="0"
+              />
+              %
+            </div>
+            <!-- Move the Generate Prize Pools button here -->
+            <button id="generate-btn" onclick="generatePrizePools()">
+              Generate Prize Pools
+            </button>
+          </div>
+
+          <!-- Textbox for displaying the generation result in text format -->
+          <div class="generation-textbox">
+            <textarea
+              id="generation-result"
+              class="generation-result"
+              rows="8"
+              cols="40"
+              readonly
+            ></textarea>
+            <!-- Button to copy to clipboard -->
+            <button onclick="copyToClipboard()">Copy to Clipboard</button>
+
+            <!-- Textbox for displaying all generations in text format -->
+            <textarea
+              id="all-generations-result"
+              class="generation-result"
+              rows="12"
+              cols="40"
+              readonly
+            ></textarea>
+            <!-- Button to copy all generations to clipboard -->
+            <button onclick="copyAllToClipboard()">
+              Copy All Prize Pools to Clipboard
+            </button>
+          </div>
+        </div>
+
+        <!-- Section to display the calculated result -->
+        <div id="calculated-results" class="calculated-results">
+          <!-- Results will be dynamically shown here -->
+        </div>
+
+        <!-- Section to display item counts -->
+        <div id="item-counts" class="item-counts">
+          <!-- Item counts will be dynamically shown here -->
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
