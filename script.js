@@ -109,11 +109,17 @@ function generatePrizePools() {
     nothingCount = totalHoles - assignedHoles; // Fill the remaining holes with Nothing
   }
 
+  // Get the selected world
+  const world = document.getElementById('world-select').value;
+
   let allItems = [];
   allItems = allItems.concat(Array(bombCount).fill('Bomb'));
   allItems = allItems.concat(Array(chestCount).fill('Chest'));
   allItems = allItems.concat(Array(strangeObjectCount).fill('Strange Object'));
-  allItems = allItems.concat(Array(petCount).fill('Pet'));
+  
+  // Update pet name dynamically based on the selected world
+  allItems = allItems.concat(Array(petCount).fill(`Pet${world}`));
+  
   allItems = allItems.concat(Array(nothingCount).fill('Nothing'));
 
   allItems = shuffleArray(allItems);
@@ -143,6 +149,7 @@ function generatePrizePools() {
   document.getElementById('all-generations-result').value = allGenerationsResult;
 }
 
+
 // Function to generate result for a single generation
 function generateGenerationResult(generationIndex, items) {
   let result = `${generationIndex}: [`;
@@ -170,7 +177,14 @@ function displayGeneration(generationIndex, columns) {
     const hole = document.createElement('div');
     hole.classList.add('hole');
     const img = document.createElement('img');
-    img.src = `images/${item}.png`;
+    
+    // Check if the item is a pet, and set the image source accordingly
+    if (item.startsWith("Pet")) {
+      img.src = 'images/Pet.png';  // Always use Pet.png for the image
+    } else {
+      img.src = `images/${item}.png`;  // Use the respective image for other items
+    }
+    
     hole.appendChild(img);
     holesContainer.appendChild(hole);
   });
@@ -180,6 +194,7 @@ function displayGeneration(generationIndex, columns) {
   const generationResult = generateGenerationResult(generationIndex, generation);
   document.getElementById('generation-result').value = generationResult;
 }
+
 
 // Function to copy a single generation result to clipboard
 function copyToClipboard() {
